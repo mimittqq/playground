@@ -1,0 +1,19 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "play and test",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "mimittqq <332990332@qq.com> (https://github.com/mimittqq)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^24.5.0",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3333"
+  }
+}
