@@ -11,3 +11,4 @@ export function reverse_integer(x:number) : number {
   }
   return result
 }
+
