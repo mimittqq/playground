@@ -1,4 +1,4 @@
-import { bubbleSort, selectSort, insertSort } from "../sort";
+import { bubbleSort, selectSort, insertSort, quickSort } from "../sort";
 
 describe('能正确排序', () => {
   test('冒泡排序', () => {
@@ -12,5 +12,9 @@ describe('能正确排序', () => {
   test('插入排序', () => {
     const arr = [10, 4, 3, 12, 6, 18];
     expect(insertSort(arr)).toEqual([3, 4, 6, 10, 12, 18]);
+  })
+  test('快速排序', () => {
+    const arr = [10, 4, 3, 12, 6, 18];
+    expect(quickSort(arr)).toEqual([3, 4, 6, 10, 12, 18]);
   })
 })

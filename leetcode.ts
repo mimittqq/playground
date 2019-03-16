@@ -127,7 +127,10 @@ export function search_insert_position(nums:number[], target:number) : number {
   if (target > nums[nums.length - 1]) {
     return nums.length;
   }
-  let index = 0;
+  if (target < nums[0]) {
+    return 0;
+  }
+  let index = 1;
   function split_arr_and_check(arr:number[], target) {
     if (arr.length === 1) {
       return;
@@ -136,11 +139,7 @@ export function search_insert_position(nums:number[], target:number) : number {
     const left_arr = arr.slice(0, middle_num);
     const right_arr = arr.slice(middle_num)
     
-    console.log(left_arr);
-    console.log(right_arr);
-    
-    
-    if (target < right_arr[0]) {
+    if (target <= right_arr[0]) {
       split_arr_and_check(left_arr, target);
     } else {
       split_arr_and_check(right_arr, target);

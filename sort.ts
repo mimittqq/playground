@@ -51,3 +51,26 @@ export function insertSort(arr) {
   
   return arr;
 }
+
+/**
+ * `快速排序法`
+ * 原理是选择数组中的某个数进行比较, 递归依次把比这个数小的数放在它之前, 比它大的放在之后
+ */
+export function quickSort(nums:number[]) : number[] {
+  if (nums.length <= 1) {
+    return nums; //  递归出口
+  }
+  const left = [];
+  const right = [];
+  const target = nums.shift(); // 取出数组中第一位作为比较对象, 并去掉数组第一位
+  for (let i = nums.length; i--;) {
+    const item = nums[i]
+    if (item > target) {
+      right.push(item)
+    } else {
+      left.push(item)
+    }
+  }
+  
+  return [...quickSort(left), target, ...quickSort(right)];
+}
