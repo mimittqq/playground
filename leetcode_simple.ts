@@ -127,7 +127,10 @@ export function search_insert_position(nums:number[], target:number) : number {
   if (target > nums[nums.length - 1]) {
     return nums.length;
   }
-  let index = 0;
+  if (target <= nums[0]) {
+    return 0;
+  }
+  let index = 1;
   function split_arr_and_check(arr:number[], target) {
     if (arr.length === 1) {
       return;
@@ -136,11 +139,7 @@ export function search_insert_position(nums:number[], target:number) : number {
     const left_arr = arr.slice(0, middle_num);
     const right_arr = arr.slice(middle_num)
     
-    console.log(left_arr);
-    console.log(right_arr);
-    
-    
-    if (target < right_arr[0]) {
+    if (target <= right_arr[0]) {
       split_arr_and_check(left_arr, target);
     } else {
       split_arr_and_check(right_arr, target);
@@ -149,4 +148,69 @@ export function search_insert_position(nums:number[], target:number) : number {
   }
   split_arr_and_check(nums, target)
   return index
+}
+
+export function count_and_say(n) {
+  if (n === 1) {
+    return '1'
+  }
+  if (n === 2) {
+    return '11'
+  }
+  function genarate_next_item(prev_item:string) {
+    let result = ''
+    let current_char = prev_item.charAt(0)
+    let current_num = 1
+    for (let i = 1; i < prev_item.length; i++) {
+      let char = prev_item[i]
+      if (current_char === char) {
+        current_num++
+      } else {
+        result += `${current_num}${current_char}`
+        current_char = char
+        current_num = 1
+      }
+    }
+    result += `${current_num}${current_char}`
+    n--;
+    if (n > 1) {
+      return genarate_next_item(result)
+    } else {
+      return result
+    }
+  }
+  return genarate_next_item('1')
+}
+
+export function find_the_town_judge(N:number, trust:number[][]) : number {
+  if (N === 1 && trust.length === 0) {
+    return 1;
+  }
+  // 用于储存有多少人相信此人的二维数组, 数组下标为其标记-1
+  const save_table = [];
+  for (let i = 0; i < trust.length; i++) {
+    const [truster, trusted] = trust[i];
+    const trusted_arr_index = trusted - 1;
+    if (!save_table[trusted_arr_index]) {
+      save_table[trusted_arr_index] = {
+        trusted_num: 0,
+        is_trusted_other: false,
+        flag: trusted,
+      }
+    }
+    save_table[trusted_arr_index].trusted_num++;
+    if (!save_table[truster - 1]) {
+      save_table[truster - 1] = {
+        is_trusted_other: true,
+      }
+    } else {
+      save_table[truster - 1].is_trusted_other = true
+    }
+  }
+  
+  // 满足条件的人
+  const correct_people = save_table.filter((item) => {
+    return item.trusted_num === N - 1 && !item.is_trusted_other
+  })
+  return correct_people.length === 1 ? correct_people[0].flag : -1;
 }
