@@ -21,3 +21,30 @@ export function deepClone(object:any) {
   }
   return iterator(object);
 }
+
+export function falt<T>(target:(T | T[])[]) : T[] {
+  const result = [];
+  function iterator(arr:(T | T[])[]) {
+    for (let i = 0; i < arr.length; i++) {
+      const item = arr[i]
+      if (Array.isArray(item)) {
+        iterator(item)
+      } else {
+        result.push(item);
+      }
+    }
+  }
+  iterator(target)
+  return result;
+}
+
+export function co<T>(genarator) {
+  const iterator:IterableIterator<T> = genarator();
+  function run(iteration:IteratorResult<T>) {
+    if (iteration.done) {
+      return iteration.value
+    }
+    run(iterator.next(iteration.value))
+  }
+  run(iterator.next());
+}

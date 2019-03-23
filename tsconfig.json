@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "plugins": [
+      {
+        "name": "tslint-language-service"
+      }
+    ],
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es6",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "declaration": true,
+    "declarationDir": "types",
+    "outDir": "dist/es5",
+    "removeComments": true,
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "dist",
+    "libs",
+    "node_modules"
+  ]
+}

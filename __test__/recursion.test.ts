@@ -1,4 +1,4 @@
-import { deepClone } from "../recursion";
+import { deepClone, falt } from "../recursion";
 
 describe('递归练习', () => {
   test('深拷贝', () => {
@@ -24,5 +24,8 @@ describe('递归练习', () => {
         }
       }
     );
+  })
+  test('扁平化', () => {
+    expect(falt([1, 2, [3, [4, 5]]])).toEqual([1, 2, 3, 4, 5])
   })
 })
