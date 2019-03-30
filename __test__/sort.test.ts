@@ -1,4 +1,4 @@
-import { bubbleSort, selectSort, insertSort, quickSort } from "../sort";
+import { bubbleSort, selectSort, insertSort, quickSort, HeapSort } from "../sort";
 
 describe('能正确排序', () => {
   test('冒泡排序', () => {
@@ -16,5 +16,10 @@ describe('能正确排序', () => {
   test('快速排序', () => {
     const arr = [10, 4, 3, 12, 6, 18];
     expect(quickSort(arr)).toEqual([3, 4, 6, 10, 12, 18]);
+  })
+  test('堆排序', () => {
+    const arr = [10, 4, 3, 12, 6, 18];
+    const heapSort = new HeapSort(arr);
+    expect(heapSort.heapifySort()).toEqual([3, 4, 6, 10, 12, 18]);
   })
 })

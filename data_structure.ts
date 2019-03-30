@@ -116,3 +116,58 @@ export class BinaryTree<T> {
     return result
   }
 }
+
+class Node<T> {
+  value:T;
+  children?:Node<T>[];
+  constructor(value, children?) {
+    this.value = value;
+    if (children) {
+      this.children = children;
+    }
+  }
+}
+
+/**
+ * dps: 深度优先算法, 利用栈保存需要遍历的点, 当完全遍历完一个后再遍历下一个出栈的对象
+ */
+export function dps<T>(tree:Node<T>) {
+  const nodes = [];
+  const stacks:Node<T>[] = [];
+  if (tree) {
+    stacks.push(tree);
+    while (stacks.length) {
+      const item = stacks.pop();
+      nodes.push(item.value);
+      if (item.children) {
+        for (let i = item.children.length; i--;) {
+          stacks.push(item.children[i]);
+        }
+      }
+    }
+  }
+  return nodes;
+}
+
+/**
+ * bps: 广度优先算法, 利用队列, 先遍历完一遍再遍历下一次的对象
+ */
+export function bps<T>(tree:Node<T>) {
+  const nodes = [];
+  const queue:Node<T>[] = [];
+  if (tree) {
+    queue.push(tree);
+    while (queue.length) {
+      // 队列遵循先进先出, 所以拿的是第一个
+      const item = queue.shift();
+      nodes.push(item.value);
+      if (item.children) {
+        // 正向遍历
+        for (let i = 0; i < item.children.length; i++) {
+          queue.push(item.children[i])
+        }
+      }
+    }
+  }
+  return nodes;
+}

@@ -1,4 +1,4 @@
-import { BinaryTree } from './../data_structure';
+import { BinaryTree, dps, bps } from './../data_structure';
 describe('测试数据结构', () => {
   test('测试二叉树', () => {
     const binary_tree = new BinaryTree();
@@ -13,5 +13,33 @@ describe('测试数据结构', () => {
     expect(binary_tree.getMax()).toEqual(90)
     expect(binary_tree.find(8).value).toEqual(8)
     expect(binary_tree.find(39)).toEqual(null)
+  })
+  test('测试深度/广度优先遍历', () => {
+    const tree = {
+      value: '1',
+      children: [
+        {
+          value: '1-1',
+          children: [
+            {
+              value: '1-1-1',
+            }
+          ]
+        },
+        {
+          value: '1-2',
+        },
+        {
+          value: '1-3',
+          children: [
+            {
+              value: '1-3-1',
+            }
+          ]
+        }
+      ]
+    }
+    expect(dps(tree)).toEqual(['1', '1-1', '1-1-1', '1-2', '1-3', '1-3-1'])
+    expect(bps(tree)).toEqual(['1', '1-1', '1-2', '1-3', '1-1-1', '1-3-1'])
   })
 })
